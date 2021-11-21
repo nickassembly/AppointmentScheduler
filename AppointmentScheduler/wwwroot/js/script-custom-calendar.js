@@ -10,8 +10,6 @@ $(document).ready(function () {
 var calendar;
 function InitializeCalendar() {
     try {
-
-
         var calendarEl = document.getElementById('calendar');
         if (calendarEl != null) {
             calendar = new FullCalendar.Calendar(calendarEl, {
@@ -68,7 +66,6 @@ function InitializeCalendar() {
     }
 
 }
-
 
 function onShowModal(obj, isEventDetail) {
     if (isEventDetail != null) {
