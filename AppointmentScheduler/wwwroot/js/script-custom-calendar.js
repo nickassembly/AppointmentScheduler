@@ -7,25 +7,27 @@ $(document).ready(function () {
 
     InitializeCalendar();
 });
+
 var calendar;
 function InitializeCalendar() {
     try {
         var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            selectable: true,
-            editable: false,
-            select: function (event) {
-                onShowModal(event, null);
-            }
-        });
-        calendar.render();
-
+        if (calendarEl != null) {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                editable: false,
+                select: function (event) {
+                    onShowModal(event, null);
+                }
+            });
+            calendar.render();
+        }
     }
     catch (e) {
         alert(e);
@@ -38,11 +40,11 @@ function onShowModal(obj, isEventDetail) {
 }
 
 function onCloseModal() {
-    $("#apointmentForm")[0].reset();
-    $("#id").val(0);
-    $("#title").val('');
-    $("#description").val('');
-    $("#appointmentDate").val('');
+    //$("#apointmentForm")[0].reset();
+    //$("#id").val(0);
+    //$("#title").val('');
+    //$("#description").val('');
+    //$("#appointmentDate").val('');
 
     $("#appointmentInput").modal("hide");
 }
