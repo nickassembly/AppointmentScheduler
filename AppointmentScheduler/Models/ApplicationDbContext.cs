@@ -14,6 +14,6 @@ namespace AppointmentScheduler.Models
         {
         }
 
-
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }
