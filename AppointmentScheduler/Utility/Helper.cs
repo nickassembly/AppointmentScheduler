@@ -17,7 +17,8 @@ namespace AppointmentScheduler.Utility
         public static string appointmentDeleted = "Appointment deleted successfully";
         public static string appointmentExists = "Appointment for selected date and time already exists.";
         public static string appointmentNotExists = "Appointment does not exist";
-
+        public static string meetingConfirm = "Meeting confirm succsesful";
+        public static string meetingConfirmError = "Error confirming meeting";
         public static string appointmentAddError = "Something went wrong, please try again.";
         public static string appointmentUpdateError = "Something went wrong, please try again.";
         public static string somethingWentWrong = "Something went wrong, please try again.";

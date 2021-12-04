@@ -83,6 +83,8 @@ function onShowModal(obj, isEventDetail) {
         $("#lblDoctorName").html(obj.doctorName);
         if (obj.isDoctorApproved) {
             $("#lblStatus").html('Approved');
+            $("#btnConfirm").addClass('d-none');
+            $("#btnSubmit").addClass('d-none');
         } else {
             $("#lblStatus").html('Pending');
         }
@@ -96,7 +98,7 @@ function onShowModal(obj, isEventDetail) {
 }
 
 function onCloseModal() {
-    $("#apointmentForm")[0].reset();
+    $("#appointmentForm")[0].reset();
     $("#id").val(0);
     $("#title").val('');
     $("#description").val('');
@@ -181,50 +183,50 @@ function onDoctorChange() {
     calendar.refetchEvents();
 }
 
-//function onDeleteAppointment() {
-//    var id = parseInt($("#id").val());
-//    $.ajax({
-//        url: routeURL + '/api/Appointment/DeleteAppoinment/' + id,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (response) {
+function onDeleteAppointment() {
+    var id = parseInt($("#id").val());
+    $.ajax({
+        url: routeURL + '/api/Appointment/DeleteAppointment/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
 
-//            if (response.status === 1) {
-//                $.notify(response.message, "success");
-//                calendar.refetchEvents();
-//                onCloseModal();
-//            }
-//            else {
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
 
-//                $.notify(response.message, "error");
-//            }
-//        },
-//        error: function (xhr) {
-//            $.notify("Error", "error");
-//        }
-//    });
-//}
+                $.notify(response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
+}
 
-//function onConfirm() {
-//    var id = parseInt($("#id").val());
-//    $.ajax({
-//        url: routeURL + '/api/Appointment/ConfirmEvent/' + id,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (response) {
+function onConfirm() {
+    var id = parseInt($("#id").val());
+    $.ajax({
+        url: routeURL + '/api/Appointment/ConfirmEvent/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
 
-//            if (response.status === 1) {
-//                $.notify(response.message, "success");
-//                calendar.refetchEvents();
-//                onCloseModal();
-//            }
-//            else {
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
 
-//                $.notify(response.message, "error");
-//            }
-//        },
-//        error: function (xhr) {
-//            $.notify("Error", "error");
-//        }
-//    });
-//}
+                $.notify(response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
+}
