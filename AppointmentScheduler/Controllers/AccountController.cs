@@ -43,7 +43,7 @@ namespace AppointmentScheduler.Controllers
                 {
                     var user = await _userManager.FindByNameAsync(model.Email);
                     HttpContext.Session.SetString("ssuserName", user.Name);
-                   // var userName = HttpContext.Session.GetString("ssuserName");
+                    // var userName = HttpContext.Session.GetString("ssuserName");
                     return RedirectToAction("Index", "Appointment");
                 }
                 ModelState.AddModelError("", "Invalid Login attempt");
@@ -53,7 +53,7 @@ namespace AppointmentScheduler.Controllers
 
         public async Task<IActionResult> Register()
         {
-            if(!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult())
             {
                 await _roleManager.CreateAsync(new IdentityRole(Helper.Admin));
                 await _roleManager.CreateAsync(new IdentityRole(Helper.Doctor));
@@ -80,8 +80,11 @@ namespace AppointmentScheduler.Controllers
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, model.RoleName);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    if (!User.IsInRole(Helper.Admin))
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                    }
+                    return RedirectToAction("Index", "Appointment");
                 }
 
                 foreach (var error in result.Errors)

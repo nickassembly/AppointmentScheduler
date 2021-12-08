@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppointmentScheduler.Utility
 {
@@ -25,14 +21,23 @@ namespace AppointmentScheduler.Utility
         public static int success_code = 1;
         public static int failure_code = 0;
 
-        public static List<SelectListItem> GetRolesForDropDown()
+        public static List<SelectListItem> GetRolesForDropDown(bool isAdmin)
         {
-            return new List<SelectListItem>
+            if (isAdmin)
             {
-                new SelectListItem{Value=Helper.Admin, Text=Helper.Admin},
-                new SelectListItem{Value=Helper.Patient, Text=Helper.Patient},
-                new SelectListItem{Value=Helper.Doctor, Text=Helper.Doctor}
-            };
+                return new List<SelectListItem>
+                {
+                     new SelectListItem{Value=Helper.Admin, Text=Helper.Admin},
+                };
+            }
+            else
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem{Value=Helper.Patient, Text=Helper.Patient},
+                    new SelectListItem{Value=Helper.Doctor, Text=Helper.Doctor}
+                };
+            }
         }
 
         public static List<SelectListItem> GetTimeDropDown()
