@@ -3,6 +3,7 @@ using AppointmentScheduler.Services;
 using AppointmentScheduler.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -46,6 +47,11 @@ namespace AppointmentScheduler
                 options.IdleTimeout = TimeSpan.FromDays(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
             });
 
             services.AddHttpContextAccessor();
